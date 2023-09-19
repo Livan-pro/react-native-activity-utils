@@ -8,14 +8,18 @@ Provides some utility methods from Activity class to enable showing it on locked
 npm install react-native-activity-utils
 ```
 
+```sh
+yarn add react-native-activity-utils
+```
+
 ## Usage
 
 ```js
-import { multiply } from 'react-native-activity-utils';
+import { setFlags } from 'react-native-activity-utils';
 
 // ...
 
-const result = await multiply(3, 7);
+await setFlags({ turnScreenOn: true, showWhenLocked: true, keepScreenOn: true });
 ```
 
 ## Contributing
