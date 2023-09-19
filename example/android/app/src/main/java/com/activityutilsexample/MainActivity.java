@@ -1,4 +1,4 @@
-package com.activityutilsexample;
+package pro.livan.activityutilsexample;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

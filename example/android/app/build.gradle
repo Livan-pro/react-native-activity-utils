@@ -73,9 +73,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.activityutilsexample"
+    namespace "pro.livan.activityutilsexample"
     defaultConfig {
-        applicationId "com.activityutilsexample"
+        applicationId "pro.livan.activityutilsexample"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

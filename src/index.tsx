@@ -6,17 +6,26 @@ const LINKING_ERROR =
   '- You rebuilt the app after installing the package\n' +
   '- You are not using Expo Go\n';
 
-const ActivityUtils = NativeModules.ActivityUtils
-  ? NativeModules.ActivityUtils
-  : new Proxy(
-      {},
-      {
-        get() {
-          throw new Error(LINKING_ERROR);
-        },
-      }
-    );
+const isAndroid = Platform.OS === 'android';
 
-export function multiply(a: number, b: number): Promise<number> {
-  return ActivityUtils.multiply(a, b);
+const ActivityUtils = isAndroid
+  ? NativeModules.ActivityUtils
+    ? NativeModules.ActivityUtils
+    : new Proxy(
+        {},
+        {
+          get() {
+            throw new Error(LINKING_ERROR);
+          },
+        }
+      )
+  : null;
+
+export async function setFlags(params: {
+  turnScreenOn?: boolean;
+  showWhenLocked?: boolean;
+  keepScreenOn?: boolean;
+}): Promise<void> {
+  if (!isAndroid) throw new Error('Implemented only on Android!');
+  await ActivityUtils.setFlags(params);
 }

@@ -1,4 +1,4 @@
-package com.activityutils;
+package pro.livan.activityutils;
 
 import androidx.annotation.NonNull;
 

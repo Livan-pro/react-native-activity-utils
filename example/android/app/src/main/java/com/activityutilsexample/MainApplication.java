@@ -1,4 +1,4 @@
-package com.activityutilsexample;
+package pro.livan.activityutilsexample;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

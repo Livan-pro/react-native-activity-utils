@@ -45,7 +45,7 @@ def supportsNamespace() {
 
 android {
   if (supportsNamespace()) {
-    namespace "com.activityutils"
+    namespace "pro.livan.activityutils"
 
     sourceSets {
       main {
@@ -95,6 +95,6 @@ if (isNewArchitectureEnabled()) {
   react {
     jsRootDir = file("../src/")
     libraryName = "ActivityUtils"
-    codegenJavaPackageName = "com.activityutils"
+    codegenJavaPackageName = "pro.livan.activityutils"
   }
 }

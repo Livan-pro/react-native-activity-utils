@@ -1,18 +1,42 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-activity-utils';
+import { StyleSheet, View, Button } from 'react-native';
+import { setFlags } from 'react-native-activity-utils';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {
-    multiply(3, 7).then(setResult);
-  }, []);
+  const [turnScreenOn, setTurnScreenOn] = useState(false);
+  const [showWhenLocked, setShowWhenLocked] = useState(false);
+  const [keepScreenOn, setKeepScreenOn] = useState(false);
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <Button
+        onPress={() =>
+          setTurnScreenOn((prevValue) => {
+            setFlags({ turnScreenOn: !prevValue });
+            return !prevValue;
+          })
+        }
+        title={`turnScreenOn: ${turnScreenOn}`}
+      />
+      <Button
+        onPress={() =>
+          setShowWhenLocked((prevValue) => {
+            setFlags({ showWhenLocked: !prevValue });
+            return !prevValue;
+          })
+        }
+        title={`showWhenLocked: ${showWhenLocked}`}
+      />
+      <Button
+        onPress={() =>
+          setKeepScreenOn((prevValue) => {
+            setFlags({ keepScreenOn: !prevValue });
+            return !prevValue;
+          })
+        }
+        title={`keepScreenOn: ${keepScreenOn}`}
+      />
     </View>
   );
 }
@@ -22,10 +46,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
+    flexDirection: 'column',
   },
 });
