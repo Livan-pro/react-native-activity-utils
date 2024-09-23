@@ -19,7 +19,7 @@ import { setFlags } from 'react-native-activity-utils';
 
 // ...
 
-await setFlags({ turnScreenOn: true, showWhenLocked: true, keepScreenOn: true });
+await setFlags(params: boolean);
 ```
 
 ## Contributing

@@ -27,28 +27,9 @@ public class ActivityUtilsModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void setFlags(ReadableMap params, Promise promise) {
-    final var activity = getCurrentActivity();
-
-    if (activity == null) {
-      promise.reject("Missing activity in setFlags");
-      return;
-    }
-
-    if (params.hasKey("turnScreenOn")) {
-      boolean value = params.getBoolean("turnScreenOn");
-      activity.setTurnScreenOn(value);
-    }
-
-    if (params.hasKey("showWhenLocked")) {
-      boolean value = params.getBoolean("showWhenLocked");
-      activity.setShowWhenLocked(value);
-    }
-
-    if (params.hasKey("keepScreenOn")) {
-      boolean value = params.getBoolean("keepScreenOn");
-
-      UiThreadUtil.runOnUiThread(new Runnable() {
+  public void setFlags(boolean params, Promise promise) {
+    
+    UiThreadUtil.runOnUiThread(new Runnable() {
         @Override
         public void run() {
           final var activity = getCurrentActivity();
@@ -63,15 +44,13 @@ public class ActivityUtilsModule extends ReactContextBaseJavaModule {
             promise.reject("Missing window in keepScreenOn");
             return;
           }
-
-          if (value) {
-            window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+          if (params) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON|WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED| WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
           } else {
-            window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON|WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED| WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
           }
         }
       });
-    }
 
     promise.resolve(null);
   }

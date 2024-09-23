@@ -4,39 +4,20 @@ import { StyleSheet, View, Button } from 'react-native';
 import { setFlags } from 'react-native-activity-utils';
 
 export default function App() {
-  const [turnScreenOn, setTurnScreenOn] = useState(false);
-  const [showWhenLocked, setShowWhenLocked] = useState(false);
-  const [keepScreenOn, setKeepScreenOn] = useState(false);
+  const [isTurnScreenOn, setIsTurnScreenOn] = useState(false);
+ 
 
   return (
     <View style={styles.container}>
       <Button
         onPress={() =>
-          setTurnScreenOn((prevValue) => {
-            setFlags({ turnScreenOn: !prevValue });
+          setIsTurnScreenOn((prevValue: boolean) => {
+            setFlags(!prevValue);
             return !prevValue;
           })
         }
-        title={`turnScreenOn: ${turnScreenOn}`}
-      />
-      <Button
-        onPress={() =>
-          setShowWhenLocked((prevValue) => {
-            setFlags({ showWhenLocked: !prevValue });
-            return !prevValue;
-          })
-        }
-        title={`showWhenLocked: ${showWhenLocked}`}
-      />
-      <Button
-        onPress={() =>
-          setKeepScreenOn((prevValue) => {
-            setFlags({ keepScreenOn: !prevValue });
-            return !prevValue;
-          })
-        }
-        title={`keepScreenOn: ${keepScreenOn}`}
-      />
+        title={`turnScreenOn: ${isTurnScreenOn}`}
+      />      
     </View>
   );
 }
