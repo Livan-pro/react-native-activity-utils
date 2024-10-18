@@ -21,7 +21,11 @@ const ActivityUtils = isAndroid
       )
   : null;
 
-export async function setFlags(params: boolean): Promise<void> {
+export async function setFlags(params: {
+  turnScreenOn?: boolean;
+  showWhenLocked?: boolean;
+  keepScreenOn?: boolean;
+}): Promise<void> {
   if (!isAndroid) throw new Error('Implemented only on Android!');
   await ActivityUtils.setFlags(params);
 }
