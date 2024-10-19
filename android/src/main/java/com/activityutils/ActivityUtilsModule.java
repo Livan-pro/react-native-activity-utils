@@ -28,35 +28,29 @@ public class ActivityUtilsModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void setFlags(ReadableMap params, Promise promise) {
-    final var activity = getCurrentActivity();
 
-    if (activity == null) {
-      promise.reject("Missing activity in setFlags");
-      return;
-    }
+    UiThreadUtil.runOnUiThread(new Runnable() {
+      @Override
+      public void run() {
+        final var activity = getCurrentActivity();
 
-    if (params.hasKey("turnScreenOn")) {
-      boolean value = params.getBoolean("turnScreenOn");
-      activity.setTurnScreenOn(value);
-    }
+        if (activity == null) {
+          promise.reject("Missing activity in setFlags");
+          return;
+        }
 
-    if (params.hasKey("showWhenLocked")) {
-      boolean value = params.getBoolean("showWhenLocked");
-      activity.setShowWhenLocked(value);
-    }
+        if (params.hasKey("turnScreenOn")) {
+          boolean value = params.getBoolean("turnScreenOn");
+          activity.setTurnScreenOn(value);
+        }    
 
-    if (params.hasKey("keepScreenOn")) {
-      boolean value = params.getBoolean("keepScreenOn");
-
-      UiThreadUtil.runOnUiThread(new Runnable() {
-        @Override
-        public void run() {
-          final var activity = getCurrentActivity();
-
-          if (activity == null) {
-            promise.reject("Missing activity in keepScreenOn");
-            return;
-          }
+        if (params.hasKey("showWhenLocked")) {
+          boolean value = params.getBoolean("showWhenLocked");
+          activity.setShowWhenLocked(value);
+        }
+    
+        if (params.hasKey("keepScreenOn")) {
+          boolean value = params.getBoolean("keepScreenOn");
 
           final var window = activity.getWindow();
           if (window == null) {
@@ -70,8 +64,8 @@ public class ActivityUtilsModule extends ReactContextBaseJavaModule {
             window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
           }
         }
-      });
-    }
+      }
+    });
 
     promise.resolve(null);
   }
