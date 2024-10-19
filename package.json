@@ -1,6 +1,6 @@
 {
   "name": "react-native-activity-utils",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Provides some utility methods from Activity class to enable showing it on locked screen and keeping screen awake on Android.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
